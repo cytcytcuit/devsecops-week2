@@ -8,8 +8,10 @@ def divide(a, b):
         raise ValueError("Tidak boleh bagi nol")
     return a / b
 
-# Fungsi baru untuk memicu bug keamanan
 def run_command(cmd):
-    # BUG: penggunaan shell=True berbahaya (Command Injection)
-    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    # Perbaikan: tidak menggunakan shell=True
+    # Menggunakan daftar argumen agar tidak dieksekusi langsung oleh shell
+    if isinstance(cmd, str):
+        cmd = cmd.split()
+    result = subprocess.run(cmd, capture_output=True, text=True)
     return result.stdout
