@@ -22,7 +22,7 @@ jobs:
           pip install pytest bandit
 
       - name: Run Unit Tests
-        run: pytest
+        run: PYTHONPATH=. pytest
 
       - name: Static Security Analysis (Bandit)
         run: bandit -r src
