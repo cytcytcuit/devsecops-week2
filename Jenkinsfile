@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python:3.10'
+            args '-u root'
+        }
+    }
 
     stages {
 
@@ -17,7 +22,7 @@ pipeline {
 
         stage('Security Scan') {
             steps {
-                sh 'bandit -r src || true'
+                sh 'pip install bandit && bandit -r src || true'
             }
         }
 
