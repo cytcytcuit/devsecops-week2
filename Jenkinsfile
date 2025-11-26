@@ -26,6 +26,7 @@ pipeline {
             steps {
                 sh '''
                     . venv/bin/activate
+                    export PYTHONPATH=$(pwd)
                     pytest
                 '''
             }
@@ -35,7 +36,7 @@ pipeline {
             steps {
                 sh '''
                     . venv/bin/activate
-                    pip install bandit
+                    export PYTHONPATH=$(pwd)
                     bandit -r src || true
                 '''
             }
